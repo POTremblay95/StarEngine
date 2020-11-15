@@ -10,7 +10,8 @@ Since this project's purpose is to learn how to do a physics engine, every big s
 
 ### Math library
 For starter this library will have 3 majors sections 2D, 3D and 4D (for orthographic projections) and each will contains:
-  -Point, Vector, Matrix (including transformation matrix) and Quaternions
+    
+    Point, Vector, Matrix (including transformation matrix) and Quaternions
 
 ### Graphics Engine (rendering engine)
 This section will be filled when the math library will be over or almost done.
