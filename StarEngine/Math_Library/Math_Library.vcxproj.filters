@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="2D">
+      <UniqueIdentifier>{91e06688-6669-47ed-b00e-678b589f7a8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D">
+      <UniqueIdentifier>{2989e687-8cb4-4767-8232-d2a7bef83292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4D">
+      <UniqueIdentifier>{41dff87e-a61e-473f-a81d-44c1343c6cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\src">
+      <UniqueIdentifier>{af500634-12d7-4f9d-b3d4-9d7b1c28182d}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="3D\src">
+      <UniqueIdentifier>{4f8c40b1-55e9-4849-b113-a6f880d57eb1}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="4D\src">
+      <UniqueIdentifier>{8c0fe35b-2649-4106-9205-30fc7f982859}</UniqueIdentifier>
+      <Extensions>cpp;h</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Point2D.cpp">
+      <Filter>2D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>2D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix2D.cpp">
+      <Filter>2D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Point3D.cpp">
+      <Filter>3D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3D.cpp">
+      <Filter>3D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3D.cpp">
+      <Filter>3D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Point4D.cpp">
+      <Filter>4D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4D.cpp">
+      <Filter>4D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4D.cpp">
+      <Filter>4D\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>4D\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Point2D.h">
+      <Filter>2D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>2D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix2D.h">
+      <Filter>2D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Point3D.h">
+      <Filter>3D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>3D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3D.h">
+      <Filter>3D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Point4D.h">
+      <Filter>4D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4D.h">
+      <Filter>4D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4D.h">
+      <Filter>4D\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>4D\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
