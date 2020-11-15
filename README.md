@@ -1,7 +1,7 @@
 # StarEngine
 Star is a homemade physics engine.
 
-Since this project's purpose is to learn how to do a physics engine, every big step can be changed (what needs to be done in each).
+Since this project's purpose is to learn how to build a physics engine, every big step can be changed (what needs to be done in each).
 
 ## TODO
 - Implementing the followings in order: Math library, Graphics engine (renderer), Physics engine
