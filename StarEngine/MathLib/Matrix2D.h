@@ -1,5 +1,5 @@
 #pragma once
-class Point4D
+class Matrix2D
 {
 };
 

@@ -1,5 +1,5 @@
 #pragma once
-class Point3D
+class Matrix3D
 {
 };
 
