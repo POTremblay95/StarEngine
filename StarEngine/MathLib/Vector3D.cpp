@@ -15,7 +15,7 @@ namespace math3D {
 	/**
 	* Normal constructor with default values to 0
 	*/
-	Vector3D::Vector3D(float x, float y, float z)
+	Vector3D::Vector3D(double x, double y, double z)
 	{
 		this->x = x;
 		this->y = y;
@@ -27,7 +27,7 @@ namespace math3D {
 	Vector3D::Vector3D(const Vector3D& v)
 	{
 		this->x = v.x;
-		this->x = v.y;
+		this->y = v.y;
 		this->z = v.z;
 	}
 	/**
@@ -39,14 +39,14 @@ namespace math3D {
 	/**
 	* Norm of the vector
 	*/
-	float Vector3D::norm()
+	double Vector3D::norm()
 	{
 		return sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2));
 	}
 	/**
 	* Norm squared of the vector
 	*/
-	float Vector3D::norm2()
+	double Vector3D::norm2()
 	{
 		return pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2);
 	}
@@ -55,7 +55,7 @@ namespace math3D {
 	*/
 	void Vector3D::normalize()
 	{
-		float length = this->norm();
+		double length = this->norm();
 		if (length > 0) {
 			this->x /= length;
 			this->y /= length;
@@ -74,14 +74,14 @@ namespace math3D {
 	/**
 	* Dot (scalar) product between the vectors
 	*/
-	float Vector3D::dot(Vector3D v)
+	double Vector3D::dot(const Vector3D& v)
 	{
 		return this->x * v.x + this->y * v.y + this->z * v.z;
 	}
 	/**
 	* Cross product between the two vectors (doesn't modify this vector)
 	*/
-	Vector3D Vector3D::cross(Vector3D v)
+	Vector3D Vector3D::cross(const Vector3D& v)
 	{
 
 		Vector3D crossResult = Vector3D(
@@ -89,6 +89,16 @@ namespace math3D {
 			this->z*v.x-this->x*v.z,
 			this->x*v.y-this->y*v.x);
 		return crossResult;
+	}
+	/**
+	* Vector-matrix multiplication
+	*/
+	Vector3D Vector3D::matMult(const Matrix3D& m)
+	{
+		return Vector3D(
+			this->x * m.data[0][0] + this->y * m.data[1][0] + this->z * m.data[2][0],
+			this->x * m.data[0][1] + this->y * m.data[1][1] + this->z * m.data[2][1],
+			this->x * m.data[0][2] + this->y * m.data[1][2] + this->z * m.data[2][2]);
 	}
 	/*Operators overload*/
 
@@ -127,28 +137,35 @@ namespace math3D {
 	/**
 	* Scalar product (creates new vector)
 	*/
-	Vector3D Vector3D::operator*(float& v)
+	Vector3D Vector3D::operator*(double v)
 	{
 		return Vector3D(this->x * v, this->y * v, this->z * v);
 	}
 	/**
 	* Scalar product (creates a new vector)
 	*/
-	Vector3D Vector3D::operator*(int& v)
+	Vector3D Vector3D::operator*(int v)
 	{
 		return Vector3D(this->x * v, this->y * v, this->z * v);
 	}
 	/**
+	* Vector-Matrix multiplication (creates a new vector)
+	*/
+	Vector3D Vector3D::operator*(const Matrix3D& m)
+	{
+		return this->matMult(m);
+	}
+	/**
 	* Dot product
 	*/
-	float Vector3D::operator*(const Vector3D& v)
+	double Vector3D::operator*(const Vector3D& v)
 	{
 		return this->dot(v);
 	}
 	/**
 	* Scalar product (modify this vector)
 	*/
-	void Vector3D::operator*=(float& v)
+	void Vector3D::operator*=(double v)
 	{
 		this->x *= v;
 		this->y *= v;
@@ -157,11 +174,85 @@ namespace math3D {
 	/**
 	* Scalar product (modify this vector)
 	*/
-	void Vector3D::operator*=(int& v)
+	void Vector3D::operator*=(int v)
 	{
 		this->x *= v;
 		this->y *= v;
 		this->z *= v;
 	}
+	/**
+	* Vector-Matrix multiplication (modify this vector)
+	*/
+	void Vector3D::operator*=(const Matrix3D& m)
+	{
+		Vector3D multResult = *this * m;
+		this->x = multResult.x;
+		this->y = multResult.y;
+		this->z = multResult.z;
+	}
+	/**
+	* Scalar division (creates a new vector)
+	*/
+	Vector3D Vector3D::operator/(double v)
+	{
+		return Vector3D(this->x / v, this->y / v, this->z / v);
+	}
+	/**
+	* Scalar division (creates a new vector)
+	*/
+	Vector3D Vector3D::operator/(int v)
+	{
+		return Vector3D(this->x / v, this->y / v, this->z / v);
+	}
+	/**
+	* Scalar division (modify this vector)
+	*/
+	void Vector3D::operator/=(double v)
+	{
+		this->x /= v;
+		this->y /= v;
+		this->z /= v;
+	}
+	/**
+	* Scalar division (modify this vector)
+	*/
+	void Vector3D::operator/=(int v)
+	{
+		this->x /= v;
+		this->y /= v;
+		this->z /= v;
+	}
+	/**
+	* Cross product (creates a new vector)
+	*/
+	Vector3D Vector3D::operator%(const Vector3D& v)
+	{
+		return this->cross(v);
+	}
+	/**
+	* Cross product (modify this vector)
+	*/
+	void Vector3D::operator%=(const Vector3D& v)
+	{
+		Vector3D crossProduct = this->cross(v);
+		this->x = crossProduct.x;
+		this->y = crossProduct.y;
+		this->z = crossProduct.z;
+	}
+	/**
+	* Check if two vectors are equals (only if all coordinates are equals)
+	*/
+	bool Vector3D::operator==(Vector3D v)
+	{
+		return this->x == v.x && this->y == v.y && this->z == v.z;
+	}
+	/**
+	* Check if two vectors aren't equals (only if all coordinates aren't equals)
+	*/
+	bool Vector3D::operator!=(Vector3D v)
+	{
+		return this->x != v.x || this->y != v.y || this->z != v.z;
+	}
+
 
 }
