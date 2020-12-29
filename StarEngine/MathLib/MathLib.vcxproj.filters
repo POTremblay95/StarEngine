@@ -13,17 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\2D">
-      <UniqueIdentifier>{b564259d-37c2-4646-af2b-6f7fad057ef5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\3D">
       <UniqueIdentifier>{e95b5d95-de00-4f1c-bd1e-ddd0e991b16e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers sources\4D">
       <UniqueIdentifier>{9367e89d-59a3-46c0-b048-32a92eb8fdb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\2D">
-      <UniqueIdentifier>{99e6404b-1eb6-4e4d-b229-b53fa2f405e1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\3D">
       <UniqueIdentifier>{40734700-57bb-4590-a7a3-33da8731b79b}</UniqueIdentifier>
@@ -33,12 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Fichiers d%27en-tête\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix2D.h">
-      <Filter>Fichiers d%27en-tête\2D</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix3D.h">
       <Filter>Fichiers d%27en-tête\3D</Filter>
     </ClInclude>
@@ -56,12 +44,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Fichiers sources\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix2D.cpp">
-      <Filter>Fichiers sources\2D</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix3D.cpp">
       <Filter>Fichiers sources\3D</Filter>
     </ClCompile>

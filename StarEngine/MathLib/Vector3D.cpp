@@ -1,1 +1,167 @@
 #include "Vector3D.h"
+
+#include <cmath>
+
+namespace math3D {
+	/**
+	* Default constructor for a null vector
+	*/
+	Vector3D::Vector3D()
+	{
+		x = 0;
+		y = 0;
+		z = 0;
+	}
+	/**
+	* Normal constructor with default values to 0
+	*/
+	Vector3D::Vector3D(float x, float y, float z)
+	{
+		this->x = x;
+		this->y = y;
+		this->z = z;
+	}
+	/**
+	* Copy constructor
+	*/
+	Vector3D::Vector3D(const Vector3D& v)
+	{
+		this->x = v.x;
+		this->x = v.y;
+		this->z = v.z;
+	}
+	/**
+	* Default destructor
+	*/
+	Vector3D::~Vector3D()
+	{
+	}
+	/**
+	* Norm of the vector
+	*/
+	float Vector3D::norm()
+	{
+		return sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2));
+	}
+	/**
+	* Norm squared of the vector
+	*/
+	float Vector3D::norm2()
+	{
+		return pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2);
+	}
+	/**
+	* Normalize this vector
+	*/
+	void Vector3D::normalize()
+	{
+		float length = this->norm();
+		if (length > 0) {
+			this->x /= length;
+			this->y /= length;
+			this->z /= length;
+		}
+	}
+	/**
+	* Copy this vector than normalize the copy
+	*/
+	Vector3D Vector3D::normalized()
+	{
+		Vector3D copy = Vector3D(*this);
+		copy.normalize();
+		return copy;
+	}
+	/**
+	* Dot (scalar) product between the vectors
+	*/
+	float Vector3D::dot(Vector3D v)
+	{
+		return this->x * v.x + this->y * v.y + this->z * v.z;
+	}
+	/**
+	* Cross product between the two vectors (doesn't modify this vector)
+	*/
+	Vector3D Vector3D::cross(Vector3D v)
+	{
+
+		Vector3D crossResult = Vector3D(
+			this->y*v.z-this->z*v.y,
+			this->z*v.x-this->x*v.z,
+			this->x*v.y-this->y*v.x);
+		return crossResult;
+	}
+	/*Operators overload*/
+
+	/**
+	* Vectors addition (create a new vector)
+	*/
+	Vector3D Vector3D::operator+(const Vector3D& v)
+	{
+		return Vector3D(this->x + v.x, this->y + v.y, this->z + v.z);
+	}
+	/**
+	* Vectors addition (modify this vector)
+	*/
+	void Vector3D::operator+=(const Vector3D& v)
+	{
+		this->x += v.x;
+		this->y += v.y;
+		this->z += v.z;
+	}
+	/**
+	* Vectors substraction (creates a new vector)
+	*/
+	Vector3D Vector3D::operator-(const Vector3D& v)
+	{
+		return Vector3D(this->x - v.x, this->y - v.y, this->z - v.z);
+	}
+	/**
+	* Vectors substraction (modify this vector)
+	*/
+	void Vector3D::operator-=(const Vector3D& v)
+	{
+		this->x -= v.x;
+		this->y -= v.y;
+		this->z -= v.z;
+	}	
+	/**
+	* Scalar product (creates new vector)
+	*/
+	Vector3D Vector3D::operator*(float& v)
+	{
+		return Vector3D(this->x * v, this->y * v, this->z * v);
+	}
+	/**
+	* Scalar product (creates a new vector)
+	*/
+	Vector3D Vector3D::operator*(int& v)
+	{
+		return Vector3D(this->x * v, this->y * v, this->z * v);
+	}
+	/**
+	* Dot product
+	*/
+	float Vector3D::operator*(const Vector3D& v)
+	{
+		return this->dot(v);
+	}
+	/**
+	* Scalar product (modify this vector)
+	*/
+	void Vector3D::operator*=(float& v)
+	{
+		this->x *= v;
+		this->y *= v;
+		this->z *= v;
+	}
+	/**
+	* Scalar product (modify this vector)
+	*/
+	void Vector3D::operator*=(int& v)
+	{
+		this->x *= v;
+		this->y *= v;
+		this->z *= v;
+	}
+
+}
