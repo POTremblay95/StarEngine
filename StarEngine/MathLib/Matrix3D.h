@@ -1,8 +1,4 @@
 #pragma once
-#include "Vector3D.h"
-
-#include <cmath>
-#include <numbers>
 
 namespace math3D {
 
@@ -17,7 +13,6 @@ namespace math3D {
 		Matrix3D();
 		Matrix3D(double a11, double a12, double a13, double a21, double a22, double a23, double a31, double a32, double a33);
 		Matrix3D(const Matrix3D& copyMat);
-		Matrix3D(const Vector3D& v1, const Vector3D& v2, const Vector3D& v3);
 
 		//Destructor
 		~Matrix3D();
@@ -31,7 +26,13 @@ namespace math3D {
 		void rotationY(double theta);
 		void rotationZ(double theta);
 
+		void scalingMat(double sx, double sy, double sz);
+
 		/*Matrix operations*/
+		Matrix3D matMult(const Matrix3D& m);
+		void scalarMult(double a);
+		void scalarMult(int a);
+
 		double trace();
 		double determinant();
 
@@ -68,8 +69,8 @@ namespace math3D {
 		void operator/=(int v);
 
 		//2 Vectors are equals or not if they have or not the same coordinates
-		bool operator==(Matrix3D v);
-		bool operator!=(Matrix3D v);
+		bool operator==(const Matrix3D &m);
+		bool operator!=(const Matrix3D &m);
 
 	};
 

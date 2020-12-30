@@ -7,7 +7,6 @@
 namespace math3D {
 
 	//TODO toString method
-	//TODO multiply by matrix
 
 	struct Vector3D
 	{
@@ -38,7 +37,7 @@ namespace math3D {
 		
 		Vector3D cross(const Vector3D &v); //Cross product
 
-		Vector3D matMult(const Matrix3D& m); //Matrix multiplication
+		Vector3D matMult(const Matrix3D &m); //Matrix multiplication
 
 		/*Operators overload*/
 

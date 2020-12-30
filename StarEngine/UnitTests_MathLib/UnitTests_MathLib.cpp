@@ -7,7 +7,6 @@ using namespace math3D;
 
 namespace UnitTestsMathLib
 {	
-	//TODO : test for vector-matrix multiplication with and without operators overloading
 
 	TEST_CLASS(UnitTestsVector3D)
 	{
@@ -77,6 +76,20 @@ namespace UnitTestsMathLib
 			Assert::IsTrue(Vector3D(3, -6, 3) == Vector3D(4, 5, 6).cross(Vector3D(1, 2, 3)));	
 		}
 
+		/*Test for vector-matrix multiplication method*/
+		TEST_METHOD(TestMatMult)
+		{
+			//Null result
+			Matrix3D test = Matrix3D();
+			test.rotationX(30.0);
+
+			Assert::IsTrue(Vector3D() == Vector3D().matMult(Matrix3D()));
+			Assert::IsTrue(Vector3D() == Vector3D().matMult(test));
+			
+			//Other results
+			Assert::IsTrue(Vector3D(1, sqrt(3) + 1.5, -1 + 3 * sqrt(3) / 2) == Vector3D(1, 2, 3).matMult(test));
+
+		}
 
 		/*Tests for operators*/
 		TEST_METHOD(TestOperators)
@@ -111,6 +124,12 @@ namespace UnitTestsMathLib
 			Assert::IsTrue(Vector3D(-15, 60, 20) == Vector3D(-3, 12, 4) * 5);
 			Assert::IsTrue(Vector3D(0.5, 0.75, 0.25) == Vector3D(2, 3, 1) * 0.25);
 
+			//Vector-Matrix multiplicator
+			Matrix3D test1 = Matrix3D();
+			test1.rotationX(30.0);
+			Assert::IsTrue(Vector3D(32, 54, 85) == Vector3D(32, 54, 85) * Matrix3D());
+			Assert::IsTrue(Vector3D(1, sqrt(3) + 1.5, -1 + 3 * sqrt(3) / 2) == Vector3D(1, 2, 3) * test1);
+
 			//Scalar division
 			Assert::IsTrue(Vector3D() == Vector3D() / 2);
 			Assert::IsTrue(Vector3D(1, 2, 3) == Vector3D(1, 2, 3) / 1.0);
@@ -127,6 +146,66 @@ namespace UnitTestsMathLib
 			//Not equals
 			Assert::IsTrue(Vector3D() != Vector3D(1, 0, 0));
 			Assert::IsTrue(Vector3D(1, 0, 0) != Vector3D(0, 1, 0));
+		}
+	};
+
+	//TODO Rendu là (dois faire les tests pour matrix3D)
+	TEST_CLASS(UnitTestsMatrix3D) {
+
+		/*Test the identity method*/
+		TEST_METHOD(TestIdentity)
+		{
+			//Check if the identity method resets the matrix to identity
+			Matrix3D test = Matrix3D();
+			test.identity();
+
+			Assert::IsTrue(Matrix3D() == test);
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			test.identity();
+			Assert::IsTrue(Matrix3D() == test);
+		}
+
+		/*Test for the rotation matrices*/
+		TEST_METHOD(TestRotationsMatrices)
+		{
+			//Check for the rotation by the x axis
+			Matrix3D test = Matrix3D();
+			test.rotationX(30.0);
+			Assert::IsTrue(Matrix3D(1, 0, 0, 0, sqrt(3) / 2, -1 / 2, 0, 1 / 2, sqrt(3) / 2) == test);
+
+			test.identity();
+			test.rotationX(45.0);
+			Assert::IsTrue(Matrix3D(1, 0, 0, 0, 1 / sqrt(2), -1 / sqrt(2), 0, 1 / sqrt(2), 1 / sqrt(2)) == test);
+
+			test.identity();
+			test.rotationX(180);
+			Assert::IsTrue(Matrix3D(1, 0, 0, 0, -1, 0, 0, 0, -1) == test);
+
+			//Check for the rotation by the y axis
+			test.identity();
+			test.rotationY(30.0);
+			Assert::IsTrue(Matrix3D(sqrt(3) / 2, 0, 1 / 2, 0, 1, 0, -1 / 2, 0, sqrt(3)) == test);
+
+			test.identity();
+			test.rotationY(45.0);
+			Assert::IsTrue(Matrix3D(1 / sqrt(2), 0, 1 / sqrt(2), 0, 1, 0, -1 / sqrt(2), 0, 1 / sqrt(2)) == test);
+
+			test.identity();
+			test.rotationY(180);
+			Assert::IsTrue(Matrix3D(-1, 0, 0, 0, 1, 0, 0, 0, -1) == test);
+
+			//Check for the rotation by the z axis
+			test.identity();
+			test.rotationZ(30.0);
+			Assert::IsTrue(Matrix3D(sqrt(3) / 2, -1 / 2, 0, 1 / 2, sqrt(3) / 2, 0, 0, 0, 1) == test);
+
+			test.identity();
+			test.rotationZ(45.0);
+			Assert::IsTrue(Matrix3D(1 / sqrt(2), -1 / sqrt(2), 0, 1 / sqrt(2), 1 / sqrt(2), 0, 0, 0, 1) == test);
+
+			test.identity();
+			test.rotationZ(180);
+			Assert::IsTrue(Matrix3D(-1, 0, 0, 0, -1, 0, 0, 0, 1) == test);
 		}
 	};
 }
