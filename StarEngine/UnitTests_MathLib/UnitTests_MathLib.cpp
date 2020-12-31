@@ -173,39 +173,163 @@ namespace UnitTestsMathLib
 			test.rotationX(30.0);
 			Assert::IsTrue(Matrix3D(1, 0, 0, 0, sqrt(3) / 2, -1 / 2, 0, 1 / 2, sqrt(3) / 2) == test);
 
-			test.identity();
 			test.rotationX(45.0);
 			Assert::IsTrue(Matrix3D(1, 0, 0, 0, 1 / sqrt(2), -1 / sqrt(2), 0, 1 / sqrt(2), 1 / sqrt(2)) == test);
 
-			test.identity();
 			test.rotationX(180);
 			Assert::IsTrue(Matrix3D(1, 0, 0, 0, -1, 0, 0, 0, -1) == test);
 
 			//Check for the rotation by the y axis
-			test.identity();
 			test.rotationY(30.0);
 			Assert::IsTrue(Matrix3D(sqrt(3) / 2, 0, 1 / 2, 0, 1, 0, -1 / 2, 0, sqrt(3)) == test);
 
-			test.identity();
 			test.rotationY(45.0);
 			Assert::IsTrue(Matrix3D(1 / sqrt(2), 0, 1 / sqrt(2), 0, 1, 0, -1 / sqrt(2), 0, 1 / sqrt(2)) == test);
 
-			test.identity();
 			test.rotationY(180);
 			Assert::IsTrue(Matrix3D(-1, 0, 0, 0, 1, 0, 0, 0, -1) == test);
 
 			//Check for the rotation by the z axis
-			test.identity();
 			test.rotationZ(30.0);
 			Assert::IsTrue(Matrix3D(sqrt(3) / 2, -1 / 2, 0, 1 / 2, sqrt(3) / 2, 0, 0, 0, 1) == test);
 
-			test.identity();
 			test.rotationZ(45.0);
 			Assert::IsTrue(Matrix3D(1 / sqrt(2), -1 / sqrt(2), 0, 1 / sqrt(2), 1 / sqrt(2), 0, 0, 0, 1) == test);
 
-			test.identity();
 			test.rotationZ(180);
 			Assert::IsTrue(Matrix3D(-1, 0, 0, 0, -1, 0, 0, 0, 1) == test);
 		}
+
+		/*Tests for the definition of the scaling matrix*/
+		TEST_METHOD(TestScalingMat)
+		{
+			Matrix3D test = Matrix3D();
+			test.scalingMat(0, 0, 0);
+			Assert::IsTrue(Matrix3D(0, 0, 0, 0, 0, 0, 0, 0, 0) == test);
+
+			test.scalingMat(1, 1, 1);
+			Assert::IsTrue(Matrix3D() == test);
+
+			test.scalingMat(1.5, 0.75, 0.5);
+			Assert::IsTrue(Matrix3D(1.5, 0, 0, 0, 0.75, 0, 0, 0, 0.5) == test);
+
+			test.scalingMat(-5 / 8, 1, 2.46);
+			Assert::IsTrue(Matrix3D(-5 / 8, 0, 0, 0, 1, 0, 0, 0, 2.46) == test);
+		}
+
+		/*Tests for matrix multiplication*/
+		TEST_METHOD(TestMatMultiplication)
+		{
+			Matrix3D test = Matrix3D(28, 33, 29, 28, 31, 31, 28, 33, 29);
+			Assert::IsTrue(test == Matrix3D(1, 2, 3, 3, 2, 1, 1, 2, 3).matMult(Matrix3D(4, 5, 6, 6, 5, 4, 4, 6, 5)));
+
+			Assert::IsTrue(test == test.matMult(Matrix3D()));
+
+			test = Matrix3D(4, 13, 13, -4, -11, -15, 4, 13, 13);
+			Assert::IsTrue(test == Matrix3D(1, 2, 3, -3, -2, -1, 1, 2, 3).matMult(Matrix3D(4, 5, 6, -6, -5, -4, 4, 6, 5)));
+		}
+
+		/*Tests for scalar multiplication*/
+		TEST_METHOD(TestScalarMultiplication)
+		{
+			Matrix3D test = Matrix3D();
+			test.scalarMult(5 / 9);
+
+			Assert::IsTrue(Matrix3D(5 / 9, 0, 0, 0, 5 / 9, 0, 0, 0, 5 / 9) == test);
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			test.scalarMult(7);
+			Assert::IsTrue(Matrix3D(7, 14, 21, 28, 35, 42, 49, 56, 63) == test);
+		}
+
+		/*Tests for the trace of the matrix*/
+		TEST_METHOD(TestTrace)
+		{
+			Matrix3D test = Matrix3D();
+			Assert::AreEqual(3.0, test.trace());
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			Assert::AreEqual(15.0, test.trace());
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, -9);
+			Assert::AreEqual(-3.0, test.trace());
+
+			test = Matrix3D(1, 2, 3, -3, -2, -1, 2, 3, 1);
+			Assert::AreEqual(0.0, test.trace());
+		}
+
+		/*Test for the determinant of the matrix*/
+		TEST_METHOD(TestDeterminant)
+		{
+			Matrix3D test = Matrix3D();
+			Assert::AreEqual(1.0, test.determinant());
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			Assert::AreEqual(0.0, test.determinant());
+
+			test = Matrix3D(1, 2, 3, -3, -2, -1, 2, 3, 1);
+			Assert::AreEqual(-12.0, test.determinant());
+		}
+
+		/*Test for the transpose of the matrix*/
+		TEST_METHOD(TestTranspose)
+		{
+			Matrix3D test = Matrix3D();
+			test.transpose();
+			Assert::IsTrue(Matrix3D() == test);
+
+			test = Matrix3D(1, 2, 3, 3, 2, 1, 2, 1, 3);
+			test.transpose();
+			Assert::IsTrue(Matrix3D(1, 3, 2, 2, 2, 1, 3, 1, 3) == test);
+
+			test = Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75);
+			test.transpose();
+			Assert::IsTrue(Matrix3D(12, 89, 1.02, 5, 45, 2.5, 8, 23, 0.75) == test);
+
+			//Check if the transposed give the right result and doesn't modify this
+			test = Matrix3D(1, 2, 3, 3, 2, 1, 2, 1, 3);
+			Matrix3D trans = test.transposed();
+			Assert::IsTrue(Matrix3D(1, 3, 2, 2, 2, 1, 3, 1, 3) == trans);
+			Assert::IsTrue(test != trans);
+
+			test = Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75);
+			trans = test.transposed();
+			Assert::IsTrue(Matrix3D(12, 89, 1.02, 5, 45, 2.5, 8, 23, 0.75) == trans);
+			Assert::IsTrue(test != trans);
+		}
+
+		/*Tests for the inverse of matrix*/
+		TEST_METHOD(TestInverseMatrix)
+		{
+			Matrix3D test = Matrix3D();
+			test.inverse();
+			Assert::IsTrue(Matrix3D() == test);
+
+			test = Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75);
+			test.inverse();
+			//If it cannot be inverse, it stay the same
+			Assert::IsTrue(Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75) == test);
+			
+			test = Matrix3D(1, 2, 3, -2, -3, -6, 7, 8, 9);
+			test.inverse();
+			Matrix3D result = Matrix3D(-21, -6, 3, 24, 12, 0, -5, -6, -1);
+			result.scalarMult(1 / 12);
+			Assert::IsTrue(result == test);
+
+			//Check if the inversed gives the right result and doesn't modify this
+			test = Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75);
+			Matrix3D inversed = test.inversed();
+			Assert::IsTrue(test == inversed);
+
+			test = Matrix3D(1, 2, 3, -2, -3, -6, 7, 8, 9);
+			inversed = test.inversed();
+			result = Matrix3D(-21, -6, 3, 24, 12, 0, -5, -6, -1);
+			result.scalarMult(1 / 12);
+			Assert::IsTrue(result == inversed);
+			Assert::IsTrue(inversed != test);
+		}
+
+		/*Tests for the operators overloaded*/
+		
 	};
 }
