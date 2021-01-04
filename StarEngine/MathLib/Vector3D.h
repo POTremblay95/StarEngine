@@ -33,6 +33,9 @@ namespace math3D {
 		void normalize(); //Normalize this vector
 		Vector3D normalized(); //Return a copy of this vector normalized without normalizing this vector
 
+		void reverse(); //Reverse the vector
+		Vector3D reversed(); //Creates a Vector3D which is the reverse of this
+
 		double dot(const Vector3D &v); //Dot (scalar) product
 		
 		Vector3D cross(const Vector3D &v); //Cross product

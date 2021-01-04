@@ -72,6 +72,22 @@ namespace math3D {
 		return copy;
 	}
 	/**
+	* Reverse this vector
+	*/
+	void Vector3D::reverse()
+	{
+		this->x *= -1;
+		this->y *= -1;
+		this->z *= -1;
+	}
+	/**
+	* Create a new vector which is the reverse of this vector
+	*/
+	Vector3D Vector3D::reversed()
+	{
+		return Vector3D(this->x * -1, this->y * -1, this->z * -1);
+	}
+	/**
 	* Dot (scalar) product between the vectors
 	*/
 	double Vector3D::dot(const Vector3D& v)

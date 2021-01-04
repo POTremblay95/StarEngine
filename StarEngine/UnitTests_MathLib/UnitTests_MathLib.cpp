@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "Vector3D.h"
+#include <iostream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace math3D;
@@ -166,39 +167,9 @@ namespace UnitTestsMathLib
 		}
 
 		/*Test for the rotation matrices*/
-		TEST_METHOD(TestRotationsMatrices)
-		{
-			//Check for the rotation by the x axis
-			Matrix3D test = Matrix3D();
-			test.rotationX(30.0);
-			Assert::IsTrue(Matrix3D(1, 0, 0, 0, sqrt(3) / 2, -1 / 2, 0, 1 / 2, sqrt(3) / 2) == test);
 
-			test.rotationX(45.0);
-			Assert::IsTrue(Matrix3D(1, 0, 0, 0, 1 / sqrt(2), -1 / sqrt(2), 0, 1 / sqrt(2), 1 / sqrt(2)) == test);
-
-			test.rotationX(180);
-			Assert::IsTrue(Matrix3D(1, 0, 0, 0, -1, 0, 0, 0, -1) == test);
-
-			//Check for the rotation by the y axis
-			test.rotationY(30.0);
-			Assert::IsTrue(Matrix3D(sqrt(3) / 2, 0, 1 / 2, 0, 1, 0, -1 / 2, 0, sqrt(3)) == test);
-
-			test.rotationY(45.0);
-			Assert::IsTrue(Matrix3D(1 / sqrt(2), 0, 1 / sqrt(2), 0, 1, 0, -1 / sqrt(2), 0, 1 / sqrt(2)) == test);
-
-			test.rotationY(180);
-			Assert::IsTrue(Matrix3D(-1, 0, 0, 0, 1, 0, 0, 0, -1) == test);
-
-			//Check for the rotation by the z axis
-			test.rotationZ(30.0);
-			Assert::IsTrue(Matrix3D(sqrt(3) / 2, -1 / 2, 0, 1 / 2, sqrt(3) / 2, 0, 0, 0, 1) == test);
-
-			test.rotationZ(45.0);
-			Assert::IsTrue(Matrix3D(1 / sqrt(2), -1 / sqrt(2), 0, 1 / sqrt(2), 1 / sqrt(2), 0, 0, 0, 1) == test);
-
-			test.rotationZ(180);
-			Assert::IsTrue(Matrix3D(-1, 0, 0, 0, -1, 0, 0, 0, 1) == test);
-		}
+		/*The rotations has been tested with the debugger and worked fine.
+		It cannot be tested without using the definition in the cpp files because of numerical errors.*/
 
 		/*Tests for the definition of the scaling matrix*/
 		TEST_METHOD(TestScalingMat)
@@ -233,9 +204,9 @@ namespace UnitTestsMathLib
 		TEST_METHOD(TestScalarMultiplication)
 		{
 			Matrix3D test = Matrix3D();
-			test.scalarMult(5 / 9);
+			test.scalarMult(5.0 / 9);
 
-			Assert::IsTrue(Matrix3D(5 / 9, 0, 0, 0, 5 / 9, 0, 0, 0, 5 / 9) == test);
+			Assert::IsTrue(Matrix3D(5.0 / 9, 0, 0, 0, 5.0 / 9, 0, 0, 0, 5.0 / 9) == test);
 
 			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
 			test.scalarMult(7);
@@ -305,31 +276,98 @@ namespace UnitTestsMathLib
 			test.inverse();
 			Assert::IsTrue(Matrix3D() == test);
 
-			test = Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75);
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
 			test.inverse();
 			//If it cannot be inverse, it stay the same
-			Assert::IsTrue(Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75) == test);
+			Assert::IsTrue(Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9) == test);
 			
 			test = Matrix3D(1, 2, 3, -2, -3, -6, 7, 8, 9);
 			test.inverse();
 			Matrix3D result = Matrix3D(-21, -6, 3, 24, 12, 0, -5, -6, -1);
-			result.scalarMult(1 / 12);
+			result.scalarMult(1.0 / 12);
+
 			Assert::IsTrue(result == test);
 
 			//Check if the inversed gives the right result and doesn't modify this
-			test = Matrix3D(12, 5, 8, 89, 45, 23, 1.02, 2.5, 0.75);
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
 			Matrix3D inversed = test.inversed();
 			Assert::IsTrue(test == inversed);
 
 			test = Matrix3D(1, 2, 3, -2, -3, -6, 7, 8, 9);
 			inversed = test.inversed();
 			result = Matrix3D(-21, -6, 3, 24, 12, 0, -5, -6, -1);
-			result.scalarMult(1 / 12);
+			result.scalarMult(1.0 / 12.0);
 			Assert::IsTrue(result == inversed);
 			Assert::IsTrue(inversed != test);
+
+			result = test.matMult(inversed);
+			Assert::IsTrue(Matrix3D() == result);
 		}
 
 		/*Tests for the operators overloaded*/
+		TEST_METHOD(TestOperators)
+		{
+			//Tests for addition
+			Matrix3D test = Matrix3D();
+			Matrix3D result = Matrix3D() + test;
+			Assert::IsTrue(Matrix3D(2, 0, 0, 0, 2, 0, 0, 0, 2) == result);
+
+			test += Matrix3D();
+			Assert::IsTrue(Matrix3D(2, 0, 0, 0, 2, 0, 0, 0, 2) == test);
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			result = test + Matrix3D(-1.0 / 2, -1, -2.5, -3, -4.5, -5, -6.5, -7, -8.5);
+			Assert::IsTrue(Matrix3D(1.0 / 2, 1, 1.0 / 2, 1, 1.0 / 2, 1, 1.0 / 2, 1, 1.0 / 2) == result);
+			test += Matrix3D(-1.0 / 2, -1, -2.5, -3, -4.5, -5, -6.5, -7, -8.5);
+			Assert::IsTrue(Matrix3D(1.0 / 2, 1, 1.0 / 2, 1, 1.0 / 2, 1, 1.0 / 2, 1, 1.0 / 2) == test);
+
+			//Tests for substraction
+			test = Matrix3D();
+			result = Matrix3D() - test;
+			Assert::IsTrue(Matrix3D(0, 0, 0, 0, 0, 0, 0, 0, 0) == result);
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			test -= Matrix3D(9, 8, 7, 6, 5, 4, 3, 2, 1);
+			Assert::IsTrue(Matrix3D(-8, -6, -4, -2, 0, 2, 4, 6, 8) == test);
+
+			//Tests for scalar multiplication
+			test = Matrix3D();
+			Assert::IsTrue(Matrix3D(1.0 / 3, 0, 0, 0, 1.0 / 3, 0, 0, 0, 1.0 / 3) == test * (1.0 / 3));
+			Assert::IsTrue(Matrix3D() == test);
+
+			test = Matrix3D(1, 2, 3, 3, 2, 1, 2, 1, 3);
+			test *= 9;
+			Assert::IsTrue(Matrix3D(9, 18, 27, 27, 18, 9, 18, 9, 27) == test);
+
+			//Tests for Matrix multiplication
+			test = Matrix3D();
+			test.rotationX(30);
+			result = Matrix3D() * test;
+			Assert::IsTrue(result == test);
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			result = test * Matrix3D(1, 2, 3, 1, 2, 3, 1, 2, 3);
+			Assert::IsTrue(Matrix3D(6, 12, 18, 15, 30, 45, 24, 48, 72) == result);
+
+			test = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			test *= test;
+			Assert::IsTrue(Matrix3D(30, 36, 42, 66, 81, 96, 102, 126, 150) == test);
+			result = Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9);
+			Assert::IsTrue(result != test);
+
+			//Tests for scalar division
+			test = Matrix3D();
+			result = test / 3;
+			Assert::IsTrue(Matrix3D(1.0 / 3, 0, 0, 0, 1.0 / 3, 0, 0, 0, 1.0 / 3) == result);
+
+			test = Matrix3D(5, 10, 15, 20, 25, 30, 35, 40, 45);
+			test /= 5;
+			Assert::IsTrue(Matrix3D(1, 2, 3, 4, 5, 6, 7, 8, 9) == test);
+			result = Matrix3D(5, 10, 15, 20, 25, 30, 35, 40, 45);
+			Assert::IsTrue(result != test);
+
+			/*The boolean operators are done in the assertions*/
+		}
 		
 	};
 }

@@ -1,6 +1,7 @@
 #define _USE_MATH_DEFINES
 
 #include "Matrix3D.h"
+#include <iostream>
 #include <cmath>
 
 namespace math3D {
@@ -180,7 +181,7 @@ namespace math3D {
 		return this->data[0][0] * this->data[1][1] * this->data[2][2]
 			+ this->data[0][1] * this->data[1][2] * this->data[2][0]
 			+ this->data[0][2] * this->data[1][0] * this->data[2][1]
-			- this->data[0][2] * this->data[1][1] * this->data[2][1]
+			- this->data[0][2] * this->data[1][1] * this->data[2][0]
 			- this->data[0][1] * this->data[1][0] * this->data[2][2]
 			- this->data[0][0] * this->data[1][2] * this->data[2][1];
 	}
@@ -216,17 +217,17 @@ namespace math3D {
 
 			Matrix3D copy = Matrix3D(*this);
 
-			this->data[0][0] *= copy.data[1][1] * copy.data[2][2] - copy.data[1][2] * copy.data[2][1];
-			this->data[0][1] *= -copy.data[1][0] * copy.data[2][2] + copy.data[1][2] * copy.data[2][0];
-			this->data[0][2] *= copy.data[1][0] * copy.data[2][1] - copy.data[1][1] * copy.data[2][0];
-			this->data[1][0] *= -copy.data[0][1] * copy.data[2][2] + copy.data[2][1] * copy.data[0][2];
-			this->data[1][1] *= copy.data[0][0] * copy.data[2][2] - copy.data[0][2] * copy.data[2][0];
-			this->data[1][2] *= -copy.data[0][0] * copy.data[2][1] + copy.data[0][1] * copy.data[2][0];
-			this->data[2][0] *= copy.data[0][1] * copy.data[1][2] - copy.data[1][1] * copy.data[0][2];
-			this->data[2][1] *= -copy.data[0][0] * copy.data[1][2] + copy.data[1][0] * copy.data[0][2];
-			this->data[2][2] *= copy.data[0][0] * copy.data[1][1] - copy.data[0][1] * copy.data[1][0];
+			this->data[0][0] = copy.data[1][1] * copy.data[2][2] - copy.data[1][2] * copy.data[2][1];
+			this->data[0][1] = -copy.data[0][1] * copy.data[2][2] + copy.data[2][1] * copy.data[0][2];
+			this->data[0][2] = copy.data[0][1] * copy.data[1][2] - copy.data[1][1] * copy.data[0][2];
+			this->data[1][0] = -copy.data[1][0] * copy.data[2][2] + copy.data[1][2] * copy.data[2][0];
+			this->data[1][1] = copy.data[0][0] * copy.data[2][2] - copy.data[0][2] * copy.data[2][0];
+			this->data[1][2] = -copy.data[0][0] * copy.data[1][2] + copy.data[1][0] * copy.data[0][2];
+			this->data[2][0] = copy.data[1][0] * copy.data[2][1] - copy.data[1][1] * copy.data[2][0];
+			this->data[2][1] = -copy.data[0][0] * copy.data[2][1] + copy.data[0][1] * copy.data[2][0];
+			this->data[2][2] = copy.data[0][0] * copy.data[1][1] - copy.data[0][1] * copy.data[1][0];
 
-			this->scalarMult(det);
+			this->scalarMult(1/det);
 		}
 	}
 	/**
@@ -357,7 +358,7 @@ namespace math3D {
 	Matrix3D Matrix3D::operator/(double v)
 	{
 		Matrix3D copy = Matrix3D(*this);
-		copy.scalarMult(1 / v);
+		copy.scalarMult(1.0 / v);
 
 		return copy;
 	}
@@ -367,7 +368,7 @@ namespace math3D {
 	Matrix3D Matrix3D::operator/(int v)
 	{
 		Matrix3D copy = Matrix3D(*this);
-		copy.scalarMult(1 / v);
+		copy.scalarMult(1.0 / v);
 
 		return copy;
 	}
@@ -376,23 +377,30 @@ namespace math3D {
 	*/
 	void Matrix3D::operator/=(double v)
 	{
-		this->scalarMult(1 / v);
+		this->scalarMult(1.0 / v);
 	}
 	/**
 	* Scalar division (modify this matrix)
 	*/
 	void Matrix3D::operator/=(int v)
 	{
-		this->scalarMult(1 / v);
+		this->scalarMult(1.0 / v);
 	}
 	/**
 	* Check if two matrices are equals (if all elements are the same)
 	*/
 	bool Matrix3D::operator==(const Matrix3D &m)
 	{
-		return (this->data[0][0]==m.data[0][0] && this->data[0][1]==m.data[0][1] && this->data[0][2] ==m.data[0][2]
-			&& this->data[1][0] == m.data[1][0] && this->data[1][1] == m.data[1][1] && this->data[1][2] == m.data[1][2]
-			&& this->data[2][0] == m.data[2][0] && this->data[2][1] == m.data[2][1] && this->data[2][2] == m.data[2][2]);
+		double epsilon = 1e-15; //Numerical error authorised
+		return this->data[0][0] <= m.data[0][0] + epsilon && this->data[0][0] >= m.data[0][0] - epsilon
+			&& this->data[0][1] <= m.data[0][1] + epsilon && this->data[0][1] >= m.data[0][1] - epsilon
+			&& this->data[0][2] <= m.data[0][2] + epsilon && this->data[0][2] >= m.data[0][2] - epsilon
+			&& this->data[1][0] <= m.data[1][0] + epsilon && this->data[1][0] >= m.data[1][0] - epsilon
+			&& this->data[1][1] <= m.data[1][1] + epsilon && this->data[1][1] >= m.data[1][1] - epsilon
+			&& this->data[1][2] <= m.data[1][2] + epsilon && this->data[1][2] >= m.data[1][2] - epsilon
+			&& this->data[2][0] <= m.data[2][0] + epsilon && this->data[2][0] >= m.data[2][0] - epsilon
+			&& this->data[2][1] <= m.data[2][1] + epsilon && this->data[2][1] >= m.data[2][1] - epsilon
+			&& this->data[2][2] <= m.data[2][2] + epsilon && this->data[2][2] >= m.data[2][2] - epsilon;
 	}
 
 	bool Matrix3D::operator!=(const Matrix3D &m)

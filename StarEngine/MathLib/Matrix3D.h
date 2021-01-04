@@ -42,8 +42,6 @@ namespace math3D {
 		void inverse();
 		Matrix3D inversed();
 
-		//Scalar and matrix multiplications will only be with the operators
-
 		/*Operators overload*/
 
 		//Matrix addition
