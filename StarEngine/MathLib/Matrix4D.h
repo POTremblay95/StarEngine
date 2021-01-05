@@ -1,4 +1,6 @@
 #pragma once
+#include "Vector3D.h"
+#include "Matrix3D.h"
 namespace math4D {
 	struct Matrix4D
 	{
@@ -11,6 +13,9 @@ namespace math4D {
 			double a10, double a11, double a12, double a13,
 			double a20, double a21, double a22, double a23,
 			double a30, double a31, double a32, double a33);
+		Matrix4D(const math3D::Matrix3D& m);
+		Matrix4D(const math3D::Vector3D& v);
+		Matrix4D(const math3D::Matrix3D& m, const math3D::Vector3D& v);
 		Matrix4D(const Matrix4D& m);
 
 		//Destructor

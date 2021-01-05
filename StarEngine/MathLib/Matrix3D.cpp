@@ -1,7 +1,6 @@
 #define _USE_MATH_DEFINES
 
 #include "Matrix3D.h"
-#include <iostream>
 #include <cmath>
 
 namespace math3D {
