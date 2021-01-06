@@ -40,36 +40,36 @@ namespace math4D {
 		/*Operators overload*/
 		
 		//Quaternions addition
-		Quaternion operator+(const Quaternion& v);
-		void operator+=(const Quaternion& v);
+		Quaternion operator+(const Quaternion& quat);
+		void operator+=(const Quaternion& quat);
 
-		//RENDU LÀ
-		//Vectors substraction
-		Vector4D operator-(const Vector4D& v);
-		void operator-=(const Vector4D& v);
+		//Quaternions substraction
+		Quaternion operator-(const Quaternion& quat);
+		void operator-=(const Quaternion& quat);
 
-		//Dot and scalar product
-		Vector4D operator*(double v);
-		Vector4D operator*(int v);
-		Vector4D operator*(const Matrix4D& m);
-		double operator*(const Vector4D& v);
+		//Scalar multiplication
+		Quaternion operator*(double s);
+		Quaternion operator*(int s);
 		void operator*=(double v);
 		void operator*=(int v);
-		void operator*=(const Matrix4D& m);
+
+		//Quaternion multiplication
+		Quaternion operator*(const Quaternion& quat);
+		void operator*=(const Quaternion& quat);
+
+		//Vector multiplication
+		Quaternion operator*(const math3D::Vector3D& v);
+		void operator*=(const math3D::Vector3D& v);
 
 		//Scalar division
-		Vector4D operator/(double v);
-		Vector4D operator/(int v);
-		void operator/=(double v);
-		void operator/=(int v);
+		Quaternion operator/(double s);
+		Quaternion operator/(int s);
+		void operator/=(double s);
+		void operator/=(int s);
 
-		//Cross product
-		Vector4D operator%(const Vector4D& v);
-		void operator%=(const Vector4D& v);
-
-		//2 Vectors are equals or not if they have or not the same coordinates
-		bool operator==(Vector4D v);
-		bool operator!=(Vector4D v);
+		//2 Vectors are equals or not if they have or not the same vector and scalar
+		bool operator==(const Quaternion& quat);
+		bool operator!=(const Quaternion& quat);
 	};
 }
 

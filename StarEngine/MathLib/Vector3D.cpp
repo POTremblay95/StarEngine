@@ -26,9 +26,7 @@ namespace math3D {
 	*/
 	Vector3D::Vector3D(const Vector3D& v)
 	{
-		this->x = v.x;
-		this->y = v.y;
-		this->z = v.z;
+		*this = v;
 	}
 	/**
 	* Default destructor
@@ -258,14 +256,14 @@ namespace math3D {
 	/**
 	* Check if two vectors are equals (only if all coordinates are equals)
 	*/
-	bool Vector3D::operator==(Vector3D v)
+	bool Vector3D::operator==(const Vector3D& v)
 	{
 		return this->x == v.x && this->y == v.y && this->z == v.z;
 	}
 	/**
 	* Check if two vectors aren't equals (only if all coordinates aren't equals)
 	*/
-	bool Vector3D::operator!=(Vector3D v)
+	bool Vector3D::operator!=(const Vector3D& v)
 	{
 		return this->x != v.x || this->y != v.y || this->z != v.z;
 	}

@@ -35,42 +35,14 @@ namespace math4D {
 		void translateMat(double tx, double ty, double tz);
 
 		/*Matrix operations*/
+		/*In homogeneous coordinates the only interesting operation is the matrix multiplication*/
 		Matrix4D matMult(const Matrix4D& m);
-		void scalarMult(double a);
-		void scalarMult(int a);
-
-		double trace();
-		double determinant();
-
-		void transpose();
-		Matrix4D transposed();
-
-		void inverse();
-		Matrix4D inversed();
 
 		/*Operators overload*/
 
-		//Matrix addition
-		Matrix4D operator+(const Matrix4D& v);
-		void operator+=(const Matrix4D& v);
-
-		//Matrix substraction
-		Matrix4D operator-(const Matrix4D& v);
-		void operator-=(const Matrix4D& v);
-
 		//Scalar and matrix product
-		Matrix4D operator*(double v);
-		Matrix4D operator*(int v);
 		Matrix4D operator*(const Matrix4D& m);
-		void operator*=(double v);
-		void operator*=(int v);
 		void operator*=(const Matrix4D& m);
-
-		//Scalar division
-		Matrix4D operator/(double v);
-		Matrix4D operator/(int v);
-		void operator/=(double v);
-		void operator/=(int v);
 
 		//2 Vectors are equals or not if they have or not the same coordinates
 		bool operator==(const Matrix4D& m);

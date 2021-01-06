@@ -72,8 +72,8 @@ namespace math3D {
 		void operator%=(const Vector3D& v);
 
 		//2 Vectors are equals or not if they have or not the same coordinates
-		bool operator==(Vector3D v);
-		bool operator!=(Vector3D v);
+		bool operator==(const Vector3D& v);
+		bool operator!=(const Vector3D& v);
 
 	};
 }

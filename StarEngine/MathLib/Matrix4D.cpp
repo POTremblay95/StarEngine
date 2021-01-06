@@ -196,4 +196,59 @@ namespace math4D {
 		math3D::Vector3D translate = math3D::Vector3D(tx, ty, tz);
 		*this = Matrix4D(translate);
 	}
+	/**
+	* Multiply this matrix with another
+	*/
+	Matrix4D Matrix4D::matMult(const Matrix4D& m)
+	{
+		return Matrix4D(
+		this->data[0][0]*m.data[0][0]+this->data[0][1]*m.data[1][0]+this->data[0][2]*m.data[2][0]+this->data[0][3]*m.data[3][0],
+		this->data[0][0] * m.data[0][1] + this->data[0][1] * m.data[1][1] + this->data[0][2] * m.data[2][1] + this->data[0][3] * m.data[3][1],
+			this->data[0][0] * m.data[0][2] + this->data[0][1] * m.data[1][2] + this->data[0][2] * m.data[2][2] + this->data[0][3] * m.data[3][2],
+			this->data[0][0] * m.data[0][3] + this->data[0][1] * m.data[1][3] + this->data[0][2] * m.data[2][3] + this->data[0][3] * m.data[3][3],
+			this->data[1][0] * m.data[0][0] + this->data[1][1] * m.data[1][0] + this->data[1][2] * m.data[2][0] + this->data[1][3] * m.data[3][0],
+			this->data[1][0] * m.data[0][1] + this->data[1][1] * m.data[1][1] + this->data[1][2] * m.data[2][1] + this->data[1][3] * m.data[3][1],
+			this->data[1][0] * m.data[0][2] + this->data[1][1] * m.data[1][2] + this->data[1][2] * m.data[2][2] + this->data[1][3] * m.data[3][2],
+			this->data[1][0] * m.data[0][3] + this->data[1][1] * m.data[1][3] + this->data[1][2] * m.data[2][3] + this->data[1][3] * m.data[3][3],
+			this->data[2][0] * m.data[0][0] + this->data[2][1] * m.data[1][0] + this->data[2][2] * m.data[2][0] + this->data[2][3] * m.data[3][0],
+			this->data[2][0] * m.data[0][1] + this->data[2][1] * m.data[1][1] + this->data[2][2] * m.data[2][1] + this->data[2][3] * m.data[3][1],
+			this->data[2][0] * m.data[0][2] + this->data[2][1] * m.data[1][2] + this->data[2][2] * m.data[2][2] + this->data[2][3] * m.data[3][2],
+			this->data[2][0] * m.data[0][3] + this->data[2][1] * m.data[1][3] + this->data[2][2] * m.data[2][3] + this->data[2][3] * m.data[3][3],
+			this->data[3][0] * m.data[0][0] + this->data[3][1] * m.data[1][0] + this->data[3][2] * m.data[2][0] + this->data[3][3] * m.data[3][0],
+			this->data[3][0] * m.data[0][1] + this->data[3][1] * m.data[1][1] + this->data[3][2] * m.data[2][1] + this->data[3][3] * m.data[3][1],
+			this->data[3][0] * m.data[0][2] + this->data[3][1] * m.data[1][2] + this->data[3][2] * m.data[2][2] + this->data[3][3] * m.data[3][2],
+			this->data[3][0] * m.data[0][3] + this->data[3][1] * m.data[1][3] + this->data[3][2] * m.data[2][3] + this->data[3][3] * m.data[3][3]
+		);
+	}
+	/**
+	* Matrix multiplication (creates a new matrix)
+	*/
+	Matrix4D Matrix4D::operator*(const Matrix4D& m)
+	{
+		return this->matMult(m);
+	}
+	/**
+	* Matrix multiplication (modify this matrix)
+	*/
+	void Matrix4D::operator*=(const Matrix4D& m)
+	{
+		*this = this->matMult(m);
+	}
+	/**
+	* Check if two matrices are equals
+	*/
+	bool Matrix4D::operator==(const Matrix4D& m)
+	{
+		return this->data[0][0]==m.data[0][0]&&this->data[0][1]==m.data[0][1]&&this->data[0][2]==m.data[0][2]&&this->data[0][3]==m.data[0][3]
+			&& this->data[1][0] == m.data[1][0] && this->data[1][1] == m.data[1][1] && this->data[1][2] == m.data[1][2] && this->data[1][3] == m.data[1][3]
+			&& this->data[2][0] == m.data[2][0] && this->data[2][1] == m.data[2][1] && this->data[2][2] == m.data[2][2] && this->data[2][3] == m.data[2][3]
+			&& this->data[3][0] == m.data[3][0] && this->data[3][1] == m.data[3][1] && this->data[3][2] == m.data[3][2] && this->data[3][3] == m.data[3][3];
+	}
+	/**
+	* Check if two matrices aren't equals
+	*/
+	bool Matrix4D::operator!=(const Matrix4D& m)
+	{
+		return !(*this == m);
+	}
 }

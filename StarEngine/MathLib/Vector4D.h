@@ -19,30 +19,12 @@ namespace math4D {
 		~Vector4D();
 
 		//Other methods
-		double norm(); //Return norm of vector
-		double norm2(); //Return norm square of vector
+		void wNormalize(); //Normalize in the w coordinates
 
-		void normalize(); //Normalize this vector
-		Vector4D normalized(); //Return a copy of this vector normalized without normalizing this vector
-
-		void reverse(); //Reverse this vector (only the 3D coordinates)
-		Vector4D reversed(); //Creates a new vector which is the reverse of this vector
-
-		double dot(const Vector4D& v); //Dot (scalar) product
-
-		Vector4D cross(const Vector4D& v); //Cross product
-
+		/*The only manipulation interesting in homogeneous coordinates in 3D graphics*/
 		Vector4D matMult(const Matrix4D& m); //Matrix multiplication
 
 		/*Operators overload*/
-
-		//Vectors addition
-		Vector4D operator+(const Vector4D& v);
-		void operator+=(const Vector4D& v);
-
-		//Vectors substraction
-		Vector4D operator-(const Vector4D& v);
-		void operator-=(const Vector4D& v);
 
 		//Dot and scalar product
 		Vector4D operator*(double v);

@@ -33,16 +33,7 @@ namespace math3D {
 	*/
 	Matrix3D::Matrix3D(const Matrix3D& copyMat)
 	{
-		data[0][0] = copyMat.data[0][0];
-		data[0][1] = copyMat.data[0][1];
-		data[0][2] = copyMat.data[0][2];
-		data[1][0] = copyMat.data[1][0];
-		data[1][1] = copyMat.data[1][1];
-		data[1][2] = copyMat.data[1][2];
-		data[2][0] = copyMat.data[2][0];
-		data[2][1] = copyMat.data[2][1];
-		data[2][2] = copyMat.data[2][2];
-
+		*this = copyMat;
 	}
 	
 	/**
