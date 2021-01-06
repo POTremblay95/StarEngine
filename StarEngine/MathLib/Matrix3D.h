@@ -54,17 +54,13 @@ namespace math3D {
 
 		//Scalar and matrix product
 		Matrix3D operator*(double v);
-		Matrix3D operator*(int v);
 		Matrix3D operator*(const Matrix3D& m);
 		void operator*=(double v);
-		void operator*=(int v);
 		void operator*=(const Matrix3D& m);
 
 		//Scalar division
 		Matrix3D operator/(double v);
-		Matrix3D operator/(int v);
 		void operator/=(double v);
-		void operator/=(int v);
 
 		//2 Vectors are equals or not if they have or not the same coordinates
 		bool operator==(const Matrix3D &m);

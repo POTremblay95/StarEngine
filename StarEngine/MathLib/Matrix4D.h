@@ -40,7 +40,7 @@ namespace math4D {
 
 		/*Operators overload*/
 
-		//Scalar and matrix product
+		//Matrix product
 		Matrix4D operator*(const Matrix4D& m);
 		void operator*=(const Matrix4D& m);
 

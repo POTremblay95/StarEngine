@@ -54,18 +54,14 @@ namespace math3D {
 
 		//Dot and scalar product
 		Vector3D operator*(double v);
-		Vector3D operator*(int v);
 		Vector3D operator*(const Matrix3D &m);
 		double operator*(const Vector3D &v);
 		void operator*=(double v);
-		void operator*=(int v);
 		void operator*=(const Matrix3D& m);
 
 		//Scalar division
 		Vector3D operator/(double v);
-		Vector3D operator/(int v);
 		void operator/=(double v);
-		void operator/=(int v);
 
 		//Cross product
 		Vector3D operator%(const Vector3D& v);

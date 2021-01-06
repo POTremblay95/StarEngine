@@ -156,13 +156,6 @@ namespace math3D {
 		return Vector3D(this->x * v, this->y * v, this->z * v);
 	}
 	/**
-	* Scalar product (creates a new vector)
-	*/
-	Vector3D Vector3D::operator*(int v)
-	{
-		return Vector3D(this->x * v, this->y * v, this->z * v);
-	}
-	/**
 	* Vector-Matrix multiplication (creates a new vector)
 	*/
 	Vector3D Vector3D::operator*(const Matrix3D& m)
@@ -186,15 +179,6 @@ namespace math3D {
 		this->z *= v;
 	}
 	/**
-	* Scalar product (modify this vector)
-	*/
-	void Vector3D::operator*=(int v)
-	{
-		this->x *= v;
-		this->y *= v;
-		this->z *= v;
-	}
-	/**
 	* Vector-Matrix multiplication (modify this vector)
 	*/
 	void Vector3D::operator*=(const Matrix3D& m)
@@ -212,25 +196,9 @@ namespace math3D {
 		return Vector3D(this->x / v, this->y / v, this->z / v);
 	}
 	/**
-	* Scalar division (creates a new vector)
-	*/
-	Vector3D Vector3D::operator/(int v)
-	{
-		return Vector3D(this->x / v, this->y / v, this->z / v);
-	}
-	/**
 	* Scalar division (modify this vector)
 	*/
 	void Vector3D::operator/=(double v)
-	{
-		this->x /= v;
-		this->y /= v;
-		this->z /= v;
-	}
-	/**
-	* Scalar division (modify this vector)
-	*/
-	void Vector3D::operator/=(int v)
 	{
 		this->x /= v;
 		this->y /= v;

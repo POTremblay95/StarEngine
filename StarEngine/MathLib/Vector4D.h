@@ -26,24 +26,9 @@ namespace math4D {
 
 		/*Operators overload*/
 
-		//Dot and scalar product
-		Vector4D operator*(double v);
-		Vector4D operator*(int v);
+		//Vector multiplication
 		Vector4D operator*(const Matrix4D& m);
-		double operator*(const Vector4D& v);
-		void operator*=(double v);
-		void operator*=(int v);
 		void operator*=(const Matrix4D& m);
-
-		//Scalar division
-		Vector4D operator/(double v);
-		Vector4D operator/(int v);
-		void operator/=(double v);
-		void operator/=(int v);
-
-		//Cross product
-		Vector4D operator%(const Vector4D& v);
-		void operator%=(const Vector4D& v);
 
 		//2 Vectors are equals or not if they have or not the same coordinates
 		bool operator==(Vector4D v);

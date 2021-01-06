@@ -1,5 +1,4 @@
 #include "Vector4D.h"
-#include "Matrix4D.h"
 
 namespace math4D {
 	/**
@@ -58,6 +57,34 @@ namespace math4D {
 			this->coordinates.x * m.data[0][2] + this->coordinates.y * m.data[1][2] + this->coordinates.z * m.data[2][2] + this->w * m.data[3][2],
 			this->coordinates.x * m.data[0][3] + this->coordinates.y * m.data[1][3] + this->coordinates.z * m.data[2][3] + this->w * m.data[3][3]
 			);
+	}
+	/**
+	* Vector/Matrix multiplication (creates a new vector)
+	*/
+	Vector4D Vector4D::operator*(const Matrix4D& m)
+	{
+		return this->matMult(m);
+	}
+	/**
+	* Vector/Matrix multiplication (modify this vector)
+	*/
+	void Vector4D::operator*=(const Matrix4D& m)
+	{
+		*this = this->matMult(m);
+	}
+	/**
+	* Check if two vectors are equals
+	*/
+	bool Vector4D::operator==(Vector4D v)
+	{
+		return this->coordinates == v.coordinates && this->w == v.w;
+	}
+	/**
+	* Check if two vectors aren't equals
+	*/
+	bool Vector4D::operator!=(Vector4D v)
+	{
+		return !(*this == v);
 	}
 
 }

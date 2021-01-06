@@ -305,16 +305,6 @@ namespace math3D {
 		return copy;
 	}
 	/**
-	* Scalar multiplication (creates a new matrix)
-	*/
-	Matrix3D Matrix3D::operator*(int v)
-	{
-		Matrix3D copy = Matrix3D(*this);
-		copy.scalarMult(v);
-
-		return copy;
-	}
-	/**
 	* Matrix multiplication (creates a new matrix)
 	*/
 	Matrix3D Matrix3D::operator*(const Matrix3D& m)
@@ -325,13 +315,6 @@ namespace math3D {
 	* Scalar multiplication (modify this matrix)
 	*/
 	void Matrix3D::operator*=(double v)
-	{
-		this->scalarMult(v);
-	}
-	/**
-	* Scalar multiplication (modify this matrix)
-	*/
-	void Matrix3D::operator*=(int v)
 	{
 		this->scalarMult(v);
 	}
@@ -353,26 +336,9 @@ namespace math3D {
 		return copy;
 	}
 	/**
-	* Scalar division (creates a new matrix)
-	*/
-	Matrix3D Matrix3D::operator/(int v)
-	{
-		Matrix3D copy = Matrix3D(*this);
-		copy.scalarMult(1.0 / v);
-
-		return copy;
-	}
-	/**
 	* Scalar division (modify this matrix)
 	*/
 	void Matrix3D::operator/=(double v)
-	{
-		this->scalarMult(1.0 / v);
-	}
-	/**
-	* Scalar division (modify this matrix)
-	*/
-	void Matrix3D::operator/=(int v)
 	{
 		this->scalarMult(1.0 / v);
 	}
