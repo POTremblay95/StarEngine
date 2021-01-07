@@ -210,7 +210,7 @@ namespace math4D {
 	*/
 	void Quaternion::operator*=(double s)
 	{
-		*this = *this * v;
+		*this = *this * s;
 	}
 	/**
 	* Quaternion multiplication (creates a new quaternion)

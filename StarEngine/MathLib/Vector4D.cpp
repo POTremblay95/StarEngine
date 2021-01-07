@@ -43,8 +43,10 @@ namespace math4D {
 	*/
 	void Vector4D::wNormalize()
 	{
-		this->coordinates /= this->w;
-		this->w = 1;
+		if (this->w != 0.0) {
+			this->coordinates /= this->w;
+			this->w = 1;
+		}
 	}
 	/**
 	* Multiply this vector by a transformation matrix (creates a new vector)
