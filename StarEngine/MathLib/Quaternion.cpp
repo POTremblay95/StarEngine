@@ -13,6 +13,14 @@ namespace math4D {
 		this->scalar = 1;
 	}
 	/**
+	* Constructor with the scalar and all coordinates
+	*/
+	Quaternion::Quaternion(double scalar, double x, double y, double z)
+	{
+		this->vector = math3D::Vector3D(x, y, z);
+		this->scalar = scalar;
+	}
+	/**
 	* Constructor with a scalar and a vector
 	*/
 	Quaternion::Quaternion(double scalar, const math3D::Vector3D& vector)
@@ -50,11 +58,11 @@ namespace math4D {
 	{
 	}
 	/**
-	* Norm squared of the quaternion
+	* Norm (magnitude) of the quaternion
 	*/
 	double Quaternion::norm()
 	{
-		return pow(this->scalar, 2) + this->vector.norm2();
+		return sqrt(pow(this->scalar, 2) + this->vector.norm2());
 	}
 	/**
 	* Normalize this quaternion (every quaternion must be normalized by definition)

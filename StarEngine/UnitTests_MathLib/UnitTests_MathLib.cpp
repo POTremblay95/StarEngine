@@ -541,6 +541,7 @@ namespace UnitTestsMathLib
 
 			quatTest = math4D::Quaternion(0, test);
 			Assert::IsTrue(quatTest.scalar == 0 && quatTest.vector == Vector3D(1, 2, 3));
+			Assert::IsTrue(quatTest == math4D::Quaternion(0, 1, 2, 3));
 
 			//Euler angles
 			quatTest = math4D::Quaternion(90, 90, 0);
@@ -559,5 +560,48 @@ namespace UnitTestsMathLib
 		}
 
 		/*Tests for the norm and normalize methods*/
+		TEST_METHOD(TestsNormNormalize)
+		{
+			//Norm method
+			math4D::Quaternion test = math4D::Quaternion(1, 2, 2, 0);
+			Assert::AreEqual(3.0, test.norm());
+			test = math4D::Quaternion(0, 1, 2, 2);
+			Assert::AreEqual(3.0, test.norm());
+
+			test = math4D::Quaternion(3, 4, 0, 0);
+			Assert::AreEqual(5.0, test.norm());
+
+			//Normalize method
+			test = math4D::Quaternion(1, 2, 2, 0);
+			test.normalize();
+			Assert::IsTrue(1.0 == test.norm() && math4D::Quaternion(1.0 / 3, 2.0 / 3, 2.0 / 3, 0) == test);
+
+			test = math4D::Quaternion(0, 3, 0, 4);
+			test.normalize();
+			Assert::IsTrue(1.0 == test.norm() && math4D::Quaternion(0, 3.0 / 5, 0, 4.0 / 5) == test);
+		}
+
+		/*Tests for the conjugate method*/
+		TEST_METHOD(TestsConjugate)
+		{
+			math4D::Quaternion test = math4D::Quaternion(1, 2, 3, 4);
+			Assert::IsTrue(math4D::Quaternion(1, -2, -3, -4) == test.conjugate());
+
+			test = math4D::Quaternion(-5, 1.0 / 5, -6.0 / 4, 0);
+			Assert::IsTrue(math4D::Quaternion(-5, -1.0 / 5, 6.0 / 4, 0) == test.conjugate());
+		}
+
+		/*Tests for the quaternions operations*/
+		TEST_METHOD(TestsOperations)
+		{
+			//Test for quaternions addition
+
+			//Test for scalar multiplication
+
+			//Test for quaternions multiplication
+
+			//Test for quaternion/vector multiplication
+			Assert::IsTrue(true); //Meanwhile
+		}
 	};
 }

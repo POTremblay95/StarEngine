@@ -12,6 +12,7 @@ namespace math4D {
 
 		//Constructors
 		Quaternion();
+		Quaternion(double scalar, double x, double y, double z);
 		Quaternion(double scalar, const math3D::Vector3D& vector = math3D::Vector3D());
 		Quaternion(double x, double y, double z); //Make quaternion from Euler angles (roll=x, pitch=y, yaw=z)
 		Quaternion(const Quaternion& quat);
