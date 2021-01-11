@@ -25,15 +25,15 @@ namespace math4D {
 	*/
 	Quaternion::Quaternion(double x, double y, double z)
 	{
-		x *= M_PI / 180;
-		y *= M_PI / 180;
-		z *= M_PI / 180;
+		double roll = x * M_PI / 180;
+		double pitch = y * M_PI / 180;
+		double yaw = z * M_PI / 180;
 
-		this->scalar = cos(x / 2) * cos(y / 2) * cos(z / 2) + sin(x / 2) * sin(y / 2) * sin(z / 2);
+		this->scalar = cos(roll / 2) * cos(pitch / 2) * cos(yaw / 2) + sin(roll / 2) * sin(pitch / 2) * sin(yaw / 2);
 		this->vector = math3D::Vector3D(
-			sin(x / 2) * cos(y / 2) * cos(z / 2) - cos(x / 2) * sin(y / 2) * sin(z / 2),
-			cos(x / 2) * sin(y / 2) * cos(z / 2) - sin(x / 2) * cos(y / 2) * sin(z / 2),
-			cos(x / 2) * cos(y / 2) * sin(z / 2) - sin(x / 2) * sin(y / 2) * cos(z / 2)
+			sin(roll / 2) * cos(pitch / 2) * cos(yaw / 2) - cos(roll / 2) * sin(pitch / 2) * sin(yaw / 2),
+			cos(roll / 2) * sin(pitch / 2) * cos(yaw / 2) + sin(roll / 2) * cos(pitch / 2) * sin(yaw / 2),
+			cos(roll / 2) * cos(pitch / 2) * sin(yaw / 2) - sin(roll / 2) * sin(pitch / 2) * cos(yaw / 2)
 		);
 	}
 	/**

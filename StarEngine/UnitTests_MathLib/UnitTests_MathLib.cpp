@@ -544,9 +544,20 @@ namespace UnitTestsMathLib
 
 			//Euler angles
 			quatTest = math4D::Quaternion(90, 90, 0);
-			Assert::IsTrue(math4D::Quaternion(1/2,Vector3D(1/2,1/2,1/2)) == quatTest);
-			Assert::IsTrue(math4D::Quaternion(0, 90, 90) == quatTest);
-			Assert::IsTrue(math4D::Quaternion(90, 0, 90) == quatTest);
+			Assert::IsTrue(math4D::Quaternion(1.0/2.0,Vector3D(1.0/2.0,1.0/2.0,-1.0/2.0)) == quatTest);
+			
+			quatTest = math4D::Quaternion(0, 0, 0);
+			Assert::IsTrue(math4D::Quaternion() == quatTest);
+
+			//Copy constructors
+			quatTest = math4D::Quaternion(1.0 / 2.0, Vector3D(1, 2, 3));
+			math4D::Quaternion test2 = math4D::Quaternion(quatTest);
+			Assert::IsTrue(test2 == quatTest);
+
+			quatTest = math4D::Quaternion(25);
+			Assert::IsTrue(test2 != quatTest && quatTest != math4D::Quaternion(1.0 / 2.0, Vector3D(1, 2, 3)));
 		}
+
+		/*Tests for the norm and normalize methods*/
 	};
 }
