@@ -4,6 +4,7 @@
 #include "Vector3D.h"
 #include "Matrix4D.h"
 #include "Vector4D.h"
+#include "Quaternion.h"
 #include <iostream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -523,4 +524,29 @@ namespace UnitTestsMathLib
 	};
 
 	/*Tests for the quaternion*/
+	TEST_CLASS(TestsQuaternions)
+	{
+		/*Tests for the constructors*/
+		TEST_METHOD(TestsConstructor)
+		{
+			Assert::IsTrue(math4D::Quaternion() == math4D::Quaternion());
+			math4D::Quaternion quatTest = math4D::Quaternion();
+
+			Assert::AreEqual(quatTest.scalar, 1.0);
+			Assert::IsTrue(quatTest.vector == Vector3D());
+
+			Vector3D test = Vector3D(1, 2, 3);
+			quatTest = math4D::Quaternion(2 / 5);
+			Assert::IsTrue(quatTest.scalar == 2 / 5 && quatTest.vector == Vector3D());
+
+			quatTest = math4D::Quaternion(0, test);
+			Assert::IsTrue(quatTest.scalar == 0 && quatTest.vector == Vector3D(1, 2, 3));
+
+			//Euler angles
+			quatTest = math4D::Quaternion(90, 90, 0);
+			Assert::IsTrue(math4D::Quaternion(1/2,Vector3D(1/2,1/2,1/2)) == quatTest);
+			Assert::IsTrue(math4D::Quaternion(0, 90, 90) == quatTest);
+			Assert::IsTrue(math4D::Quaternion(90, 0, 90) == quatTest);
+		}
+	};
 }

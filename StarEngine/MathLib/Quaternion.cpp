@@ -259,7 +259,8 @@ namespace math4D {
 	*/
 	bool Quaternion::operator==(const Quaternion& quat)
 	{
-		return this->scalar == quat.scalar && this->vector == quat.vector;
+		double epsilon = 1e-15; //Numerical error authorised
+		return this->scalar <= quat.scalar + epsilon && this->scalar >= quat.scalar - epsilon && this->vector == quat.vector;
 	}
 	/**
 	* Check if two quaternions aren't equals

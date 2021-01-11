@@ -239,10 +239,23 @@ namespace math4D {
 	*/
 	bool Matrix4D::operator==(const Matrix4D& m)
 	{
-		return this->data[0][0]==m.data[0][0]&&this->data[0][1]==m.data[0][1]&&this->data[0][2]==m.data[0][2]&&this->data[0][3]==m.data[0][3]
-			&& this->data[1][0] == m.data[1][0] && this->data[1][1] == m.data[1][1] && this->data[1][2] == m.data[1][2] && this->data[1][3] == m.data[1][3]
-			&& this->data[2][0] == m.data[2][0] && this->data[2][1] == m.data[2][1] && this->data[2][2] == m.data[2][2] && this->data[2][3] == m.data[2][3]
-			&& this->data[3][0] == m.data[3][0] && this->data[3][1] == m.data[3][1] && this->data[3][2] == m.data[3][2] && this->data[3][3] == m.data[3][3];
+		double epsilon = 1e-15; //Numerical error authorised
+		return this->data[0][0] <= m.data[0][0] + epsilon && this->data[0][0] >= m.data[0][0] - epsilon
+			&& this->data[0][1] <= m.data[0][1] + epsilon && this->data[0][1] >= m.data[0][1] - epsilon
+			&& this->data[0][2] <= m.data[0][2] + epsilon && this->data[0][2] >= m.data[0][2] - epsilon
+			&& this->data[0][3] <= m.data[0][3] + epsilon && this->data[0][3] >= m.data[0][3] - epsilon
+			&& this->data[1][0] <= m.data[1][0] + epsilon && this->data[1][0] >= m.data[1][0] - epsilon
+			&& this->data[1][1] <= m.data[1][1] + epsilon && this->data[1][1] >= m.data[1][1] - epsilon
+			&& this->data[1][2] <= m.data[1][2] + epsilon && this->data[1][2] >= m.data[1][2] - epsilon
+			&& this->data[1][3] <= m.data[1][3] + epsilon && this->data[1][3] >= m.data[1][3] - epsilon
+			&& this->data[2][0] <= m.data[2][0] + epsilon && this->data[2][0] >= m.data[2][0] - epsilon
+			&& this->data[2][1] <= m.data[2][1] + epsilon && this->data[2][1] >= m.data[2][1] - epsilon
+			&& this->data[2][2] <= m.data[2][2] + epsilon && this->data[2][2] >= m.data[2][2] - epsilon
+			&& this->data[2][3] <= m.data[2][3] + epsilon && this->data[2][3] >= m.data[2][3] - epsilon
+			&& this->data[3][0] <= m.data[3][0] + epsilon && this->data[3][0] >= m.data[3][0] - epsilon
+			&& this->data[3][1] <= m.data[3][1] + epsilon && this->data[3][1] >= m.data[3][1] - epsilon
+			&& this->data[3][2] <= m.data[3][2] + epsilon && this->data[3][2] >= m.data[3][2] - epsilon
+			&& this->data[3][3] <= m.data[3][3] + epsilon && this->data[3][3] >= m.data[3][3] - epsilon;
 	}
 	/**
 	* Check if two matrices aren't equals

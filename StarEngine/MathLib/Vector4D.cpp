@@ -79,7 +79,8 @@ namespace math4D {
 	*/
 	bool Vector4D::operator==(Vector4D v)
 	{
-		return this->coordinates == v.coordinates && this->w == v.w;
+		double epsilon = 1e-15; //Numerical error authorised
+		return this->coordinates == v.coordinates && this->w <= v.w + epsilon && this->w >= v.w - epsilon;
 	}
 	/**
 	* Check if two vectors aren't equals

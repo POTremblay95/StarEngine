@@ -226,7 +226,10 @@ namespace math3D {
 	*/
 	bool Vector3D::operator==(const Vector3D& v)
 	{
-		return this->x == v.x && this->y == v.y && this->z == v.z;
+		double epsilon = 1e-15; //Numerical error authorised
+		return this->x <= v.x + epsilon && this->x >= v.x - epsilon 
+			&& this->y <= v.y + epsilon && this->y >= v.y - epsilon 
+			&& this->z <= v.z + epsilon && this->z >= v.z - epsilon;
 	}
 	/**
 	* Check if two vectors aren't equals (only if all coordinates aren't equals)
