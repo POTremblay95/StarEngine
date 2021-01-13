@@ -239,7 +239,7 @@ namespace math4D {
 	*/
 	bool Matrix4D::operator==(const Matrix4D& m)
 	{
-		double epsilon = 1e-15; //Numerical error authorised
+		double epsilon = 1e-13; //Numerical error authorised
 		return this->data[0][0] <= m.data[0][0] + epsilon && this->data[0][0] >= m.data[0][0] - epsilon
 			&& this->data[0][1] <= m.data[0][1] + epsilon && this->data[0][1] >= m.data[0][1] - epsilon
 			&& this->data[0][2] <= m.data[0][2] + epsilon && this->data[0][2] >= m.data[0][2] - epsilon

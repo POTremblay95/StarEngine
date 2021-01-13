@@ -226,7 +226,7 @@ namespace math3D {
 	*/
 	bool Vector3D::operator==(const Vector3D& v)
 	{
-		double epsilon = 1e-15; //Numerical error authorised
+		double epsilon = 1e-13; //Numerical error authorised
 		return this->x <= v.x + epsilon && this->x >= v.x - epsilon 
 			&& this->y <= v.y + epsilon && this->y >= v.y - epsilon 
 			&& this->z <= v.z + epsilon && this->z >= v.z - epsilon;

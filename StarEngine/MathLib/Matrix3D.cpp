@@ -347,7 +347,7 @@ namespace math3D {
 	*/
 	bool Matrix3D::operator==(const Matrix3D &m)
 	{
-		double epsilon = 1e-15; //Numerical error authorised
+		double epsilon = 1e-13; //Numerical error authorised
 		return this->data[0][0] <= m.data[0][0] + epsilon && this->data[0][0] >= m.data[0][0] - epsilon
 			&& this->data[0][1] <= m.data[0][1] + epsilon && this->data[0][1] >= m.data[0][1] - epsilon
 			&& this->data[0][2] <= m.data[0][2] + epsilon && this->data[0][2] >= m.data[0][2] - epsilon

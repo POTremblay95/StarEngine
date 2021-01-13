@@ -646,7 +646,16 @@ namespace UnitTestsMathLib
 			Assert::IsTrue(math4D::Quaternion(30, 60, 90, 120) == test.rotateQuat(math4D::Quaternion(1, 2, 3, 4)));
 
 			Assert::IsTrue(math4D::Quaternion(30, 36, -150, -48) == test.rotateQuat(math4D::Quaternion(-1, 2, -3, 4)));
+			
+			Assert::IsTrue(math4D::Quaternion(1.3125, 1.125, 4.7625, 5.1) == test.rotateQuat(math4D::Quaternion(-0.5, -0.25, -0.6, -0.8)));
+
 			//Tests for the rotation of a vector
+			Assert::IsTrue(Vector3D(54, 60, 78) == test.rotateVector(Vector3D(1, 2, 3)));
+
+			Assert::IsTrue(Vector3D() == test.rotateVector(Vector3D()));
+			
+			Vector3D result = test.rotateVector(Vector3D(-0.5, 0.25, 0.8));
+			Assert::IsTrue(Vector3D(28.6, 3.5, 5.2) == test.rotateVector(Vector3D(-0.5, 0.25, 0.8)));
 		}
 	};
 }
