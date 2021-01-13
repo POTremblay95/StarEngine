@@ -22,22 +22,24 @@ namespace math4D {
 
 		/*Other methods*/
 		double norm(); //Norm (Magnitude)
-		void normalize(); //Every quaternion must be normalized
+		void normalize();
 		
 		Quaternion conjugate(); //Creates a conjugate of the quaternion
+		Quaternion inverse();  // The conjugate of the quaternion normalized
 
 		Quaternion addQuat(const Quaternion& quat);
 		Quaternion scalarMult(double s);
 		Quaternion quatMult(const Quaternion& quat);
 		Quaternion vectMult(const math3D::Vector3D& v);
 
+		Quaternion rotateQuat(const Quaternion& quat);
+		math3D::Vector3D rotateVector(const math3D::Vector3D& v); //Rotate vector by this quaternion
+
+		math3D::Matrix3D rotationMatrix(); //Get rotation matrix3x3
 		double rotationAngle();
 		math3D::Vector3D rotationAxis();
-		Quaternion rotateQuat(const Quaternion& quat);
 
-		math3D::Vector3D rotateVector(const math3D::Vector3D& v); //Rotate vector by this quaternion
 		math3D::Vector3D eulerAngles(); //Get Euler angles from this quaternion
-		math3D::Matrix3D rotationMatrix(); //Get rotation matrix3x3
 
 		/*Operators overload*/
 		

@@ -591,17 +591,62 @@ namespace UnitTestsMathLib
 			Assert::IsTrue(math4D::Quaternion(-5, -1.0 / 5, 6.0 / 4, 0) == test.conjugate());
 		}
 
+		/*No need to tests the inverse since the conjugate and normaliz method are tested*/
+
 		/*Tests for the quaternions operations*/
 		TEST_METHOD(TestsOperations)
 		{
 			//Test for quaternions addition
+			math4D::Quaternion test = math4D::Quaternion(1, 2, 3, 4);
+			Assert::IsTrue(math4D::Quaternion(-4, 27, 17, 93) == test.addQuat(math4D::Quaternion(-5, 25, 14, 89)));
+
+			Assert::IsTrue(math4D::Quaternion(0, 0, 0, 0) == test.addQuat(math4D::Quaternion(-1, -2, -3, -4)));
+
+			Assert::IsTrue(math4D::Quaternion(1, 2, 3, 4) == test.addQuat(math4D::Quaternion(0, 0, 0, 0)));
 
 			//Test for scalar multiplication
+			Assert::IsTrue(math4D::Quaternion(2, 4, 6, 8) == test.scalarMult(2));
+
+			Assert::IsTrue(math4D::Quaternion(0, 0, 0, 0) == test.scalarMult(0));
+
+			Assert::IsTrue(math4D::Quaternion(-0.5, -1, -1.5, -2) == test.scalarMult(-0.5));
 
 			//Test for quaternions multiplication
+			Assert::IsTrue(math4D::Quaternion(-28, 4, 6, 8) == test.quatMult(math4D::Quaternion(1, 2, 3, 4)));
+
+			Assert::IsTrue(math4D::Quaternion(-8, 2, 6, 4) == test.quatMult(math4D::Quaternion(1, 1, 1, 1)));
+			
+			Assert::IsTrue(math4D::Quaternion(-12, 24, -6, -12) == test.quatMult(math4D::Quaternion(-1, 2, -3, 4)));
+
+			Assert::IsTrue(math4D::Quaternion(0, 0, 0, 0) == test.quatMult(math4D::Quaternion(0, 0, 0, 0)));
+
+			Assert::IsTrue(math4D::Quaternion(1, 2, 3, 4) == test.quatMult(math4D::Quaternion(1, 0, 0, 0)));
 
 			//Test for quaternion/vector multiplication
-			Assert::IsTrue(true); //Meanwhile
+			math4D::Quaternion result = test.vectMult(Vector3D(1, 1, 1));
+
+			Assert::IsTrue(math4D::Quaternion(-9, 0, 3, 0) == test.vectMult(Vector3D(1, 1, 1)));
+			Assert::IsTrue(math4D::Quaternion(-9, 0, 3, 0) == test.quatMult(math4D::Quaternion(0, 1, 1, 1)));
+
+			Assert::IsTrue(math4D::Quaternion(-2, 1, 4, -3) == test.vectMult(Vector3D(1, 0, 0)));
+
+			Assert::IsTrue(math4D::Quaternion(-20, 2, 0, 4) == test.vectMult(Vector3D(1, 2, 3)));
+		}
+
+		/*Tests for the rotations*/
+		TEST_METHOD(TestsRotations)
+		{
+			//Tests for the rotation of a quaternion
+			math4D::Quaternion test = math4D::Quaternion(1, 2, 3, 4);
+
+			Assert::IsTrue(math4D::Quaternion(4, 16, 8, 12) == test.rotateQuat(math4D::Quaternion(1, 1, 1, 1)));
+
+			Assert::IsTrue(math4D::Quaternion(1, 2, 3, 4) == test.rotateQuat(math4D::Quaternion()));
+
+			Assert::IsTrue(math4D::Quaternion(30, 60, 90, 120) == test.rotateQuat(math4D::Quaternion(1, 2, 3, 4)));
+
+			Assert::IsTrue(math4D::Quaternion(30, 36, -150, -48) == test.rotateQuat(math4D::Quaternion(-1, 2, -3, 4)));
+			//Tests for the rotation of a vector
 		}
 	};
 }
