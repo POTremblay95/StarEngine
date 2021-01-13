@@ -657,5 +657,7 @@ namespace UnitTestsMathLib
 			Vector3D result = test.rotateVector(Vector3D(-0.5, 0.25, 0.8));
 			Assert::IsTrue(Vector3D(28.6, 3.5, 5.2) == test.rotateVector(Vector3D(-0.5, 0.25, 0.8)));
 		}
+
+		/*Tests for getting rotations caracteristics (rotation matrix 3x3, rotation axis, rotation angle)*/
 	};
 }
