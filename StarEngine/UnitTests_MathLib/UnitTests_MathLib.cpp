@@ -659,5 +659,57 @@ namespace UnitTestsMathLib
 		}
 
 		/*Tests for getting rotations caracteristics (rotation matrix 3x3, rotation axis, rotation angle)*/
+		TEST_METHOD(TestsRotationCaracteristic)
+		{
+			//Tests for the rotation Matrix
+			math4D::Quaternion test = math4D::Quaternion(1, 2, 3, 4);
+			test.normalize();
+
+			Assert::IsTrue(Matrix3D(-2.0 / 3, 2.0 / 15, 11.0 / 15, 2.0 / 3, -1.0 / 3, 2.0 / 3, 1.0 / 3, 14.0 / 15, 2.0 / 15) == test.rotationMatrix());
+
+			test = math4D::Quaternion(1, 1, 0, 0);
+			test.normalize();
+
+			Assert::IsTrue(Matrix3D(1, 0, 0, 0, 0, -1, 0, 1, 0) == test.rotationMatrix());
+
+			test = math4D::Quaternion(1, 1, 1, 0);
+			test.normalize();
+
+			Assert::IsTrue(Matrix3D(1.0 / 3, 2.0 / 3, 2.0 / 3, 2.0 / 3, 1.0 / 3, -2.0 / 3, -2.0 / 3, 2.0 / 3, -1.0 / 3) == test.rotationMatrix());
+
+			test = math4D::Quaternion();
+			test.normalize();
+
+			Assert::IsTrue(Matrix3D() == test.rotationMatrix());
+
+			//Tests for the rotation angle
+			test = math4D::Quaternion();
+			test.normalize();
+
+			Assert::AreEqual(0.0, test.rotationAngle());
+
+			test = math4D::Quaternion(0, 0.1, 2, 0);
+			test.normalize();
+
+			Assert::AreEqual(180.0, test.rotationAngle());
+
+			test = math4D::Quaternion(1, 1, 1, 1);
+			test.normalize();
+
+			double result = test.rotationAngle();
+
+			Assert::IsTrue(result <= 120.0 + 1e-13 && result >= 120.0 - 1e-13);
+
+			//Tests for the rotation axis
+			test = math4D::Quaternion();
+			test.normalize();
+
+			Assert::IsTrue(Vector3D() == test.rotationAxis());
+
+			test = math4D::Quaternion(1, 1, 0, 0);
+			test.normalize();
+
+			Assert::IsTrue(Vector3D(1, 0, 0) == test.rotationAxis());
+		}
 	};
 }

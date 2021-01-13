@@ -162,11 +162,11 @@ namespace math4D {
 		);
 	}
 	/**
-	* Get the rotation angle from the axis of the quaternion
+	* Get the rotation angle (in degrees) from the axis of the quaternion
 	*/
 	double Quaternion::rotationAngle()
 	{
-		return 2 * acos(this->scalar);
+		return 2 * acos(this->scalar) * 180.0 / M_PI;
 	}
 	/**
 	* Get the rotation axis of the quaternion 
@@ -174,17 +174,6 @@ namespace math4D {
 	math3D::Vector3D Quaternion::rotationAxis()
 	{
 		return this->vector.normalized();
-	}
-	/**
-	* Get the Euler angles in degrees from the quaternion in the form (x,y,z)=(roll,pitch,yaw)
-	*/
-	math3D::Vector3D Quaternion::eulerAngles()
-	{
-		return math3D::Vector3D(
-			atan((2 * this->vector.z * this->vector.y + 2 * this->vector.x * this->scalar) / (pow(this->scalar, 2) - pow(this->vector.x, 2) - pow(this->vector.y, 2) + pow(this->vector.z, 2))),
-			asin(2 * this->vector.y * this->scalar - 2 * this->vector.z * this->vector.x),
-			atan((2 * this->vector.x * this->vector.y + 2 * this->vector.z * this->scalar) / (pow(this->scalar, 2) + pow(this->vector.x, 2) - pow(this->vector.y, 2) - pow(this->vector.z, 2)))
-		) * 180 / M_PI;
 	}
 	/*Operators overload*/
 

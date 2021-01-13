@@ -39,8 +39,6 @@ namespace math4D {
 		double rotationAngle();
 		math3D::Vector3D rotationAxis();
 
-		math3D::Vector3D eulerAngles(); //Get Euler angles from this quaternion
-
 		/*Operators overload*/
 		
 		//Quaternions addition
